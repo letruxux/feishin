@@ -1401,7 +1401,7 @@ export type GetScanStatusResponse = ScanStatus;
 export type InternetProviderLyricResponse = {
     artist: string;
     id: string;
-    lyrics: string;
+    lyrics: LyricsResponse;
     name: string;
     source: LyricSource;
 };
@@ -1568,6 +1568,7 @@ export const instanceOfCancellationError = (error: any) => {
 export enum LyricSource {
     GENIUS = 'Genius',
     LRCLIB = 'lrclib.net',
+    LRCRED = 'lrc.red',
     NETEASE = 'NetEase',
     SIMPMUSIC = 'SimpMusic',
 }

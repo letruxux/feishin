@@ -84,6 +84,10 @@ const formatLyrics = (lyrics: string) => {
 
 export const formatLyricsForDisplay = formatLyrics;
 
+// Providers may already return structured lyrics, so only parse raw strings.
+const normalizeLyrics = (lyrics: LyricsResponse): LyricsResponse =>
+    typeof lyrics === 'string' ? formatLyrics(lyrics) : lyrics;
+
 export function computeSelectedFromResult(
     result: Pick<
         LyricsQueryResult,
@@ -202,7 +206,7 @@ export async function fetchRemoteLyricsAuto(song: QueueSong): Promise<FullLyrics
     if (remoteLyricsResult) {
         return {
             ...remoteLyricsResult,
-            lyrics: formatLyrics(remoteLyricsResult.lyrics),
+            lyrics: normalizeLyrics(remoteLyricsResult.lyrics),
             remote: true,
         };
     }
@@ -215,7 +219,7 @@ export async function fetchRemoteLyricsById(params: {
     song?: QueueSong | Song;
 }): Promise<LyricsResponse | null> {
     const result = await lyricsIpc?.getRemoteLyricsByRemoteId(params as LyricGetQuery);
-    if (result) return formatLyrics(result);
+    if (result) return normalizeLyrics(result);
     return null;
 }
 

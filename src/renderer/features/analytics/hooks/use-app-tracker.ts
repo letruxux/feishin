@@ -83,7 +83,9 @@ type SettingsProperties = {
     'settings.lyrics.fetch': boolean;
     'settings.lyrics.sources.genius': boolean;
     'settings.lyrics.sources.lrclib': boolean;
+    'settings.lyrics.sources.lrcred': boolean;
     'settings.lyrics.sources.netease': boolean;
+    'settings.lyrics.sources.simpmusic': boolean;
     'settings.minimizeToTray': boolean;
     'settings.nativeAspectRatio': boolean;
     'settings.playerbarSliderType': PlayerbarSliderType;
@@ -163,6 +165,9 @@ const getSettingsProperties = (): SettingsProperties => {
         ),
         'settings.lyrics.sources.lrclib': ignoreWeb(
             settings.lyrics.sources.includes(LyricSource.LRCLIB),
+        ),
+        'settings.lyrics.sources.lrcred': ignoreWeb(
+            settings.lyrics.sources.includes(LyricSource.LRCRED),
         ),
         'settings.lyrics.sources.netease': ignoreWeb(
             settings.lyrics.sources.includes(LyricSource.NETEASE),
